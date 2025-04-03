@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="hr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudRent - Najam Stanova za Studente</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.0/dist/alpine.min.js" defer></script> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="/public/js/jquery-functions.js"></script>
+    <script src="/public/js/global.js"></script>
+    <script src="/public/js/map.js"></script>
+    <link rel="stylesheet" href="/public/css/style.css">
+
+
+
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Keyframes for smooth scrolling animations */
+        @keyframes slideIn {
+            0% {
+                transform: translateY(100px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        .animate-slideIn {
+            animation: slideIn 1s ease-out forwards;
+        }
+
+        .animate-fadeIn {
+            animation: fadeIn 2s ease-in-out forwards;
+        }
+
+        /* Carousel customization */
+        .carousel-item {
+            transition: transform 0.5s ease-in-out;
+        }
+
+        /* Add some animations to apartment cards */
+        .hover-zoom:hover {
+            transform: scale(1.05);
+            transition: transform 0.3s;
+        }
+
+        header {
+            background-image: url('/public/assets/pattern.png');
+            background-repeat: repeat;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 text-gray-900">
+    <!-- Navigation Bar -->
+    <nav id="navbar" class="bg-white shadow-lg fixed w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex">
+                    <img class="m-3" src="/public/assets/logo/logo_purple.svg" alt="Purple logo">
+                    <a href="#" class="flex-shrink-0 flex items-center text-indigo-600 text-2xl font-bold">StudRent</a>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-gray-600 hover:text-indigo-500 px-3 py-2 rounded-md text-sm font-medium">O nama</a>
+                    <a href="#apartments" class="text-gray-600 hover:text-indigo-500 px-3 py-2 rounded-md text-sm font-medium">Stanovi</a>
+                    <a href="#team" class="text-gray-600 hover:text-indigo-500 px-3 py-2 rounded-md text-sm font-medium">Naš Tim</a>
+                    <a href="#contact" class="text-gray-600 hover:text-indigo-500 px-3 py-2 rounded-md text-sm font-medium">Kontakt</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header style="background-image: url('http://studrent.local/public/assets/pattern.svg');" class="bg-cover bg-gray-50 text-white py-20 pt-32">
+        <!-- <header class="relative bg-gradient-to-br from-indigo-600 to-purple-600 text-white py-20"> -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center">
+            <h1 class="text-4xl sm:text-5xl font-bold text-center animate-slideIn">Pronađite Savršen Studentski Dom sa <br>StudRent</h1>
+            <p class="mt-4 text-lg text-center animate-fadeIn">"Dom daleko od doma - prilagođen studentima poput vas."</p>
+            <a href="#apartments" class="mt-8 px-6 py-3 bg-white text-indigo-600 rounded-md shadow-lg hover:bg-gray-100 transition transform hover:scale-105">Pogledajte Stanove</a>
+            <a href="<?= BASE_PATH ?>/map" class="mt-8 px-6 py-3 bg-transparent border-2 border-white text-white rounded-md shadow-lg hover:bg-white hover:text-indigo-600 transition transform hover:scale-105">Mapa</a>
+
+            <button data-tooltip-id="tooltip1" data-tooltip="right">Hover me</button>
+            <div data-tooltip-for="tooltip1" class="tooltip hidden bg-gray-800 text-white text-sm rounded py-2 px-4 shadow-lg">
+                This is a tooltip
+            </div>
+
+            <button data-tooltip-id="tooltip2" data-tooltip="bottom">Hover me too</button>
+            <div data-tooltip-for="tooltip2" class="tooltip hidden bg-gray-800 text-white text-sm rounded py-2 px-4 shadow-lg">
+                This is another tooltip
+            </div>
+
+            <button data-tooltip-id="tooltip3" data-tooltip="left">Hover me left</button>
+            <div data-tooltip-for="tooltip3" class="tooltip hidden bg-gray-800 text-white text-sm rounded py-2 px-4 shadow-lg">
+                This is a left tooltip
+            </div>
+
+            <button data-tooltip-id="tooltip4" data-tooltip="top">Hover me top</button>
+            <div data-tooltip-for="tooltip4" class="tooltip hidden bg-gray-800 text-white text-sm rounded py-2 px-4 shadow-lg">
+                This is a top tooltip
+            </div>
+
+            <!-- <div data-tooltip-for="tooltip2" class="hidden bg-gray-800 text-white text-sm rounded py-2 px-4 shadow-lg">
+                This is another tooltip
+            </div> -->
+        </div>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold text-gray-800">O StudRent</h2>
+                <p class="mt-4 text-lg text-gray-500">U StudRentu vjerujemo da pronalaženje studentskog stana treba biti lako, povoljno i prilagođeno vašim potrebama.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div class="animate-slideIn">
+                    <img src="https://source.unsplash.com/featured/?apartment" alt="Stanovi" class="rounded-lg shadow-lg w-full h-64 object-cover">
+                </div>
+                <div class="flex flex-col justify-center">
+                    <p class="text-lg text-gray-600">Bilo da tražite udoban studio ili prostran stan s prijateljima, StudRent nudi razne opcije prilagođene studentskom životu. Uživajte u modernim sadržajima, blizini sveučilišta i podržavajućoj zajednici koja će vas učiniti da se osjećate kao kod kuće.</p>
+                    <blockquote class="mt-4 text-indigo-600 italic">"Vaš savršeni studentski dom je samo nekoliko klikova udaljen."</blockquote>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apartments Carousel -->
+    <section id="apartments" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Istaknuti Stanovi</h2>
+            <div class="flex space-x-6 overflow-x-auto no-scrollbar">
+                <!-- Apartment Card -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover-zoom flex-shrink-0 w-80 animate-slideIn">
+                    <img src="https://source.unsplash.com/random/200x200?apartment" alt="Stan 1" class="w-full h-40 rounded-lg object-cover">
+                    <h3 class="text-xl font-semibold mt-4">Udoban Studio</h3>
+                    <p class="mt-2 text-gray-600">Idealno za solo studente. Potpuno namješten s uključenim svim režijama.</p>
+                    <a href="#" class="text-indigo-600 mt-4 block">Pogledajte Detalje</a>
+                </div>
+                <!-- Repeat similar cards for more apartments -->
+                <div class="bg-white rounded-lg shadow-lg p-6 hover-zoom flex-shrink-0 w-80 animate-slideIn">
+                    <img src="https://source.unsplash.com/random/201x201?apartment" alt="Stan 2" class="w-full h-40 rounded-lg object-cover">
+                    <h3 class="text-xl font-semibold mt-4">Zajednički Stan</h3>
+                    <p class="mt-2 text-gray-600">Odlično za sklapanje prijateljstava. Dijelite prostor s kolegama studentima.</p>
+                    <a href="#" class="text-indigo-600 mt-4 block">Pogledajte Detalje</a>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6 hover-zoom flex-shrink-0 w-80 animate-slideIn">
+                    <img src="https://source.unsplash.com/random/202x202?apartment" alt="Stan 3" class="w-full h-40 rounded-lg object-cover">
+                    <h3 class="text-xl font-semibold mt-4">Moderni Loft</h3>
+                    <p class="mt-2 text-gray-600">Stylish i prostran, smješten u srcu studentskog područja.</p>
+                    <a href="#" class="text-indigo-600 mt-4 block">Pogledajte Detalje</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Team Section -->
+    <section id="team" class="py-16 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Upoznajte Tim Iza StudRent-a</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Team Member -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6 text-center animate-slideIn">
+                    <img src="https://source.unsplash.com/150x150/?person" alt="Član Tima 1" class="w-24 h-24 rounded-full mx-auto">
+                    <h3 class="text-lg font-semibold mt-4">Jane Doe</h3>
+                    <p class="text-sm text-gray-500">Osnivač & CEO</p>
+                </div>
+                <!-- Repeat similar cards for more team members -->
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6 text-center animate-slideIn">
+                    <img src="https://source.unsplash.com/150x151/?person" alt="Član Tima 2" class="w-24 h-24 rounded-full mx-auto">
+                    <h3 class="text-lg font-semibold mt-4">John Smith</h3>
+                    <p class="text-sm text-gray-500">Glavni Operativni Direktor</p>
+                </div>
+                <div class="bg-gray-50 rounded-lg shadow-lg p-6 text-center animate-slideIn">
+                    <img src="https://source.unsplash.com/150x152/?person" alt="Član Tima 3" class="w-24 h-24 rounded-full mx-auto">
+                    <h3 class="text-lg font-semibold mt-4">Emily Johnson</h3>
+                    <p class="text-sm text-gray-500">Voditelj Marketinga</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">Kontaktirajte Nas</h2>
+            <p class="text-center text-gray-600 mb-12">Imate pitanja? Ovdje smo da vam pomognemo pronaći vaš savršeni studentski dom.</p>
+            <div class="flex justify-center">
+                <a href="mailto:info@studrent.com" class="px-6 py-3 bg-indigo-600 text-white rounded-md shadow-lg hover:bg-indigo-500 transition transform hover:scale-105">Kontaktirajte Nas</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <p class="text-sm">&copy; 2024 StudRent. Sva prava pridržana.</p>
+        </div>
+    </footer>
+
+</body>
+
+<script>
+    if (window.innerWidth <= 768) {
+        let lastScrollY = window.scrollY;
+        const navbar = document.getElementById('navbar');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > navbar.scrollHeight) {
+                if (window.scrollY > lastScrollY) {
+                    // Scrolling down, hide the navbar
+                    navbar.style.transition = 'transform 300ms ease-in-out';
+                    navbar.style.transform = 'translateY(-100%)';
+                } else {
+                    // Scrolling up, show the navbar
+                    navbar.style.transition = 'transform 100ms ease-in-out';
+                    navbar.style.transform = 'translateY(0)';
+                }
+                lastScrollY = window.scrollY;
+            }
+        });
+    }
+</script>
+
+
+</html>
