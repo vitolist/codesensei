@@ -1,1 +1,1 @@
-Posjeti nas na [CodeSensei](https://testiranje.in)
+Posjeti nas na [CodeSensei](https://codesensei.xyz)
