@@ -3,7 +3,7 @@
 class SQLDB
 {
 
-    var $host = DB_SERVERNAME;
+    var $host = DB_HOST;
     var $username = DB_USERNAME;
     var $password = DB_PASSWORD;
     var $database = DB_NAME;

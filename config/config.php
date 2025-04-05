@@ -11,9 +11,9 @@ define('APP_AUTHOR', 'Noa Turk i Vito List');
 
 // define('APPFOLDER', 'codesensei.xyz');
 define('APPFOLDER', 'testiranje.in');
-define('DB_SERVERNAME', 'localhost');
-define('DB_USERNAME', 'codesensei');
-define('DB_PASSWORD', '14(4n;C5DH,|g5');
-define('DB_NAME', 'codesensei');
+define('DB_HOST', '138.197.178.70');
+define('DB_USERNAME', 'codesensei-remote');
+define('DB_PASSWORD', 'W7K0wlgMEX.TrLfZ');
+define('DB_NAME', 'codesensei_eu');
 // define('BASE_PATH', 'https://codesensei.xyz');
 define('BASE_PATH', 'https://testiranje.in');
